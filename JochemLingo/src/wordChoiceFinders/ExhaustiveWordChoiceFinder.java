@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import tools.Parsers;
 import valuators.AverageAmbiguousGroupSizeValuator;
 import valuators.AverageAmbiguousGroupSizeValuatorBram;
 import valuators.NonAmbiguityValuator;
-import main.Parsers;
 import myTools.LazySetOfSizedSubsets;
 import myTools.Valuator;
 

@@ -5,9 +5,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import tools.Parsers;
 import valuators.ListValuatorFromSetValuator;
 import valuators.NonAmbiguityValuator;
-import main.Parsers;
 import myAI.GeneticAlgorithm;
 import myTools.Valuator;
 
