@@ -16,7 +16,6 @@ public class ListValuatorFromSetValuator<T> implements Valuator<List<T>> {
 
     @Override
     public double valuate(List<T> list) {
-        // TODO Auto-generated method stub
         return setValuator.valuate(new HashSet<T>(list));
     }
 

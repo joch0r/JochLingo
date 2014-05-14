@@ -6,7 +6,6 @@ public class MinCorrectCountValuator extends PreComputingLingoValuator<Set<Strin
 
     public MinCorrectCountValuator(Set<String> w) {
         super(w);
-        // TODO Auto-generated constructor stub
     }
 
     @Override

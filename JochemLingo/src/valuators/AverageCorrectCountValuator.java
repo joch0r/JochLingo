@@ -6,7 +6,6 @@ public class AverageCorrectCountValuator extends PreComputingLingoValuator<Set<S
 
     public AverageCorrectCountValuator(Set<String> w) {
         super(w);
-        // TODO Auto-generated constructor stub
     }
 
     @Override

@@ -8,12 +8,10 @@ public class AverageAmbiguousGroupSizeValuatorBram extends PreComputingLingoValu
 
     public AverageAmbiguousGroupSizeValuatorBram(Set<String> words) {
         super(words);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public double valuate(Set<String> chosenWords) {
-        // TODO Auto-generated method stub
         HashMap<ArrayList<Integer>, Integer> ambiguity = new HashMap<ArrayList<Integer>, Integer>();
         for (String word : wordList) {
             ArrayList<Integer> valuationsOfChosenWords = new ArrayList<Integer>();
@@ -27,12 +25,12 @@ public class AverageAmbiguousGroupSizeValuatorBram extends PreComputingLingoValu
             }
         }
 
-        int ambiguityCount = 0;
+        int ambiguousGroups = 0;
         for (ArrayList<Integer> valuations : ambiguity.keySet()) {
             if (ambiguity.get(valuations) > 0)
-                ambiguityCount++;
+                ambiguousGroups++;
         }
 
-        return -(double) wordList.size() / (double) ambiguityCount;
+        return -(double) wordList.size() / (double) ambiguousGroups;
     }
 }

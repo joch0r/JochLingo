@@ -8,12 +8,10 @@ public class NonAmbiguityValuator extends PreComputingLingoValuator<Set<String>>
 
     public NonAmbiguityValuator(Set<String> words) {
         super(words);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public double valuate(Set<String> chosenWords) {
-        // TODO Auto-generated method stub
         HashMap<ArrayList<Integer>, Integer> ambiguity = new HashMap<ArrayList<Integer>, Integer>();
         for (String word : wordList) {
             ArrayList<Integer> valuationsOfChosenWords = new ArrayList<Integer>();
