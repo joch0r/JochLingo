@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import tools.Parsers;
+import valuators.AverageAmbiguousGroupSizeValuator;
+import valuators.AverageAmbiguousGroupSizeValuatorBram;
 import valuators.NonAmbiguityValuator;
 import myTools.LazySetOfSizedSubsets;
 import myTools.Valuator;
@@ -61,7 +63,7 @@ public class MonteCarloWordChoiceFinder implements WordChoiceFinder {
         File f = new File("data\\OpenTaal-210G-basis-gekeurd.txt");
         Set<String> words = Parsers.parse(f, 8, 'a');
 
-        Valuator<Set<String>> nonAmbiguityValuator = new NonAmbiguityValuator(words);
+        Valuator<Set<String>> nonAmbiguityValuator = new AverageAmbiguousGroupSizeValuator(words);
         Iterable<Set<String>> bestAmbiguity = new MonteCarloWordChoiceFinder(words, 3, nonAmbiguityValuator, 100000).getWords();
         for (Set<String> choice : bestAmbiguity) {
             System.out.println(choice + ", score=" + nonAmbiguityValuator.valuate(choice));
