@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Set;
 
 import tools.Parsers;
-import valuators.AverageAmbiguousGroupSizeValuator;
+import valuators.AverageAmbiguityValuator;
 import valuators.ListValuatorFromSetValuator;
-import valuators.NonAmbiguityValuator;
+import valuators.MaximalAmbiguityValuator;
 import myAI.GeneticAlgorithm;
 import myTools.Valuator;
 
@@ -45,7 +45,7 @@ public class GeneticWordChoiceFinder implements WordChoiceFinder {
         File f = new File("data\\OpenTaal-210G-basis-gekeurd.txt");
         Set<String> words = Parsers.parse(f, 8, 'a');
 
-        Valuator<Set<String>> nonAmbiguityValuator = new AverageAmbiguousGroupSizeValuator(words);
+        Valuator<Set<String>> nonAmbiguityValuator = new AverageAmbiguityValuator(words);
         Iterable<Set<String>> bestAmbiguity = new GeneticWordChoiceFinder(words, 3, nonAmbiguityValuator, 1000, 1000, 0.2, 0.05).getWords();
         for (Set<String> choice : bestAmbiguity) {
             System.out.println(choice + ", score=" + nonAmbiguityValuator.valuate(choice));

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class NonAmbiguityValuator extends PreComputingLingoValuator<Set<String>> {
+public class AverageAmbiguityValuator extends PreComputingLingoValuator<Set<String>> {
 
-    public NonAmbiguityValuator(Set<String> words) {
+    public AverageAmbiguityValuator(Set<String> words) {
         super(words);
     }
 
@@ -25,13 +25,11 @@ public class NonAmbiguityValuator extends PreComputingLingoValuator<Set<String>>
             }
         }
 
-        ArrayList<Integer> mostAmbiguousValuation = null;
+        int ambiguityCount = 0;
         for (ArrayList<Integer> valuations : ambiguity.keySet()) {
-            if (mostAmbiguousValuation == null || ambiguity.get(valuations) > ambiguity.get(mostAmbiguousValuation)) {
-                mostAmbiguousValuation = valuations;
-            }
+            ambiguityCount += ambiguity.get(valuations) * ambiguity.get(valuations);
         }
 
-        return -ambiguity.get(mostAmbiguousValuation);
+        return -(double) ambiguityCount / (double) wordList.size();
     }
 }

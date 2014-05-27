@@ -1,12 +1,18 @@
 package valuators;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class AverageAmbiguousGroupSizeValuatorBram extends PreComputingLingoValuator<Set<String>> {
+import myTools.Valuator;
+import tools.Parsers;
+import wordChoiceFinders.ExhaustiveWordChoiceFinder;
+import wordChoiceFinders.MonteCarloWordChoiceFinder;
 
-    public AverageAmbiguousGroupSizeValuatorBram(Set<String> words) {
+public class AverageAmbiguityValuatorBram extends PreComputingLingoValuator<Set<String>> {
+
+    public AverageAmbiguityValuatorBram(Set<String> words) {
         super(words);
     }
 
@@ -32,5 +38,15 @@ public class AverageAmbiguousGroupSizeValuatorBram extends PreComputingLingoValu
         }
 
         return -(double) wordList.size() / (double) ambiguousGroups;
+    }
+    
+    public static void main(String[] args) {
+        File f = new File("data\\OpenTaal-210G-basis-gekeurd.txt");
+        Set<String> words = Parsers.parse(f, 5, 'o');
+
+        Valuator<Set<String>> nonAmbiguityValuator = new AverageAmbiguityValuatorBram(words);
+        ExhaustiveWordChoiceFinder finder = new ExhaustiveWordChoiceFinder(words,3, nonAmbiguityValuator);
+        Set<Set<String>> choice = finder.getWords();
+        System.out.println(choice + ", score=" + nonAmbiguityValuator.valuate(choice.iterator().next()));
     }
 }

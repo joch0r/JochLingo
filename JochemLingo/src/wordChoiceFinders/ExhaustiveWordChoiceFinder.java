@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import tools.Parsers;
-import valuators.AverageAmbiguousGroupSizeValuator;
-import valuators.AverageAmbiguousGroupSizeValuatorBram;
-import valuators.NonAmbiguityValuator;
+import valuators.AverageAmbiguityValuator;
+import valuators.AverageAmbiguityValuatorBram;
+import valuators.MaximalAmbiguityValuator;
 import myTools.LazySetOfSizedSubsets;
 import myTools.Valuator;
 
@@ -65,7 +65,7 @@ public class ExhaustiveWordChoiceFinder implements WordChoiceFinder {
         File f = new File("data\\OpenTaal-210G-basis-gekeurd.txt");
         Set<String> words = Parsers.parse(f, 8, 'a');
 
-        Valuator<Set<String>> valuator = new AverageAmbiguousGroupSizeValuator(words);
+        Valuator<Set<String>> valuator = new AverageAmbiguityValuator(words);
         Iterable<Set<String>> bestAmbiguity = new ExhaustiveWordChoiceFinder(words, 3, valuator).getWords();
         for (Set<String> choice : bestAmbiguity) {
             System.out.println(choice + ", score=" + valuator.valuate(choice));

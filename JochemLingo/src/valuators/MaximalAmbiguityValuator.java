@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class AverageAmbiguousGroupSizeValuator extends PreComputingLingoValuator<Set<String>> {
+public class MaximalAmbiguityValuator extends PreComputingLingoValuator<Set<String>> {
 
-    public AverageAmbiguousGroupSizeValuator(Set<String> words) {
+    public MaximalAmbiguityValuator(Set<String> words) {
         super(words);
     }
 
@@ -25,11 +25,13 @@ public class AverageAmbiguousGroupSizeValuator extends PreComputingLingoValuator
             }
         }
 
-        int ambiguityCount = 0;
+        ArrayList<Integer> mostAmbiguousValuation = null;
         for (ArrayList<Integer> valuations : ambiguity.keySet()) {
-            ambiguityCount += ambiguity.get(valuations) * ambiguity.get(valuations);
+            if (mostAmbiguousValuation == null || ambiguity.get(valuations) > ambiguity.get(mostAmbiguousValuation)) {
+                mostAmbiguousValuation = valuations;
+            }
         }
 
-        return -(double) ambiguityCount / (double) wordList.size();
+        return -ambiguity.get(mostAmbiguousValuation);
     }
 }
