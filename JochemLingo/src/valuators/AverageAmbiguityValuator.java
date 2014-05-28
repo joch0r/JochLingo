@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class AverageAmbiguityValuator extends PreComputingLingoValuator<Set<String>> {
+public class AverageAmbiguityValuator extends PreComputingLingoValuator {
 
     public AverageAmbiguityValuator(Set<String> words) {
         super(words);

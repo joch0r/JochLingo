@@ -2,7 +2,7 @@ package valuators;
 
 import java.util.Set;
 
-public class MinCorrectCountValuator extends PreComputingLingoValuator<Set<String>> {
+public class MinCorrectCountValuator extends PreComputingLingoValuator {
 
     public MinCorrectCountValuator(Set<String> w) {
         super(w);

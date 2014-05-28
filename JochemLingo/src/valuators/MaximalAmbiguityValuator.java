@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
-public class MaximalAmbiguityValuator extends PreComputingLingoValuator<Set<String>> {
+public class MaximalAmbiguityValuator extends PreComputingLingoValuator {
 
     public MaximalAmbiguityValuator(Set<String> words) {
         super(words);

@@ -2,15 +2,20 @@ package valuators;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import myTools.Valuator;
 import tools.Parsers;
+import valuations.CharValuation;
+import valuations.WordValuation;
 import wordChoiceFinders.ExhaustiveWordChoiceFinder;
 import wordChoiceFinders.MonteCarloWordChoiceFinder;
 
-public class AverageAmbiguityValuatorBram extends PreComputingLingoValuator<Set<String>> {
+public class AverageAmbiguityValuatorBram extends PreComputingLingoValuator {
 
     public AverageAmbiguityValuatorBram(Set<String> words) {
         super(words);
@@ -30,23 +35,19 @@ public class AverageAmbiguityValuatorBram extends PreComputingLingoValuator<Set<
                 ambiguity.put(valuationsOfChosenWords, ambiguity.get(valuationsOfChosenWords) + 1);
             }
         }
-
-        int ambiguousGroups = 0;
-        for (ArrayList<Integer> valuations : ambiguity.keySet()) {
-            if (ambiguity.get(valuations) > 0)
-                ambiguousGroups++;
-        }
-
-        return -(double) wordList.size() / (double) ambiguousGroups;
+        
+        return -(double) wordList.size() / (double) ambiguity.size();
     }
-    
+
     public static void main(String[] args) {
         File f = new File("data\\OpenTaal-210G-basis-gekeurd.txt");
         Set<String> words = Parsers.parse(f, 5, 'o');
 
         Valuator<Set<String>> nonAmbiguityValuator = new AverageAmbiguityValuatorBram(words);
         ExhaustiveWordChoiceFinder finder = new ExhaustiveWordChoiceFinder(words,3, nonAmbiguityValuator);
-        Set<Set<String>> choice = finder.getWords();
-        System.out.println(choice + ", score=" + nonAmbiguityValuator.valuate(choice.iterator().next()));
+        //Set<Set<String>> choice = finder.getWords();
+        //System.out.println(choice + ", score=" + nonAmbiguityValuator.valuate(choice.iterator().next()));
+        System.out.println(nonAmbiguityValuator.valuate(new HashSet<String>(Arrays.asList(new String[]{ "omkat","opeen","orgel"}))));
+        System.out.println(nonAmbiguityValuator.valuate(new HashSet<String>(Arrays.asList(new String[]{ "omdat","opeen","orgel"}))));
     }
 }

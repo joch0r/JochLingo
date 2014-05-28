@@ -63,9 +63,9 @@ public class ExhaustiveWordChoiceFinder implements WordChoiceFinder {
 
     public static void main(String[] args) {
         File f = new File("data\\OpenTaal-210G-basis-gekeurd.txt");
-        Set<String> words = Parsers.parse(f, 8, 'a');
+        Set<String> words = Parsers.parse(f, 5, 'o');
 
-        Valuator<Set<String>> valuator = new AverageAmbiguityValuator(words);
+        Valuator<Set<String>> valuator = new AverageAmbiguityValuatorBram(words);
         Iterable<Set<String>> bestAmbiguity = new ExhaustiveWordChoiceFinder(words, 3, valuator).getWords();
         for (Set<String> choice : bestAmbiguity) {
             System.out.println(choice + ", score=" + valuator.valuate(choice));
